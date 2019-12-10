@@ -7,9 +7,8 @@ using NotesAppFinal.Models;
 
 namespace NotesAppFinal.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<NotesUser, NotesUserRole, int>
     {
-        public DbSet<Note> Notes { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {

@@ -37,17 +37,69 @@ body {
 }
 
 body {
-    background: #808080;
+    background: #333333;
+    color: #cfcfcf;
 }
 
-.notes-heading{
-    color:white;
-    margin-top: 50px;
+.notes-toolbar {
+    display: flex;
+    position: fixed;
+    flex-wrap: wrap;
+    justify-content: center;
+    left: 0;
+    top: 50px;
+    padding: 10px;
+    width: 100%;
     text-align: center;
+    background: #424242;
+    z-index: 10;
 }
+
+    .notes-toolbar * {
+        margin-right: 20px;
+        margin-left: 20px;
+    }
+
+    .notes-toolbar .btn {
+        height: 35px;
+    }
+
+    .notes-toolbar h2 {
+        margin: 0;
+        height: 35px;
+        color: #cfcfcf;
+    }
+
+    .notes-toolbar select {
+        width: 150px;
+    }
+
+.notes-sidebar {
+    padding: 30px 10px;
+    position: fixed;
+    left: 0;
+    top: 100px;
+    width: 100%;
+    text-align: center;
+    background: rgba(33,33,33,.7);
+    z-index: 9;
+    width: 200px;
+    height: 100%;
+}
+
+    .notes-sidebar h3 {
+        color: #cfcfcf;
+        margin: 20px;
+    }
+
+    .notes-sidebar form * {
+        margin-bottom: 20px;
+    }
+
 .notes-list {
-    margin-top: 50px;
-    padding: 0;
+    width: 100%;
+    margin-top: 75px;
+    padding-left: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -59,14 +111,16 @@ body {
     margin: 15px;
 }
 
+
     .note a {
+        position:relative;
         text-decoration: none;
         color: #000;
         background: #ffc;
         display: block;
         width: 70vw;
         height: 70vw;
-        padding: 10px;
+        padding: 20px 10px 10px 10px;
         overflow: hidden;
         text-overflow: ellipsis;
         /* Firefox */
@@ -80,23 +134,32 @@ body {
         -webkit-transition: -webkit-transform .3s linear;
     }
 
+        .note a .category {
+            position: absolute;
+            top: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+
     .note:nth-child(even) a {
         background: #cfc;
     }
+
     .note:nth-child(3n) a {
         background: #ccf;
     }
 
-.note a:hover, note a:focus {
-    -moz-box-shadow: 7px 7px 7px rgba(0,0,0,.7);
-    -webkit-box-shadow: 7px 7px 7px rgba(0,0,0,.7);
-    box-shadow: 7px 7px 7px rgba(0,0,0,.7);
-    -webkit-transform: scale(1.1);
-    -moz-transform: scale(1.1);
-    -o-transform: scale(1.1);
-    position: relative;
-    z-index: 5;
-}
+    .note a:hover, note a:focus {
+        -moz-box-shadow: 7px 7px 7px rgba(0,0,0,.7);
+        -webkit-box-shadow: 7px 7px 7px rgba(0,0,0,.7);
+        box-shadow: 7px 7px 7px rgba(0,0,0,.7);
+        -webkit-transform: scale(1.1);
+        -moz-transform: scale(1.1);
+        -o-transform: scale(1.1);
+        position: relative;
+        z-index: 5;
+    }
 
 @media(min-width:425px) {
     .note a {

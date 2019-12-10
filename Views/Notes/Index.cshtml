@@ -1,12 +1,27 @@
 ﻿
 
-<h1 class="notes-heading">Notes List</h1>
+    <div class="notes-toolbar">
+        <h2 class="notes-heading">Notes List</h2>
+        <a class="btn btn-success">Create Note +</a>
+    </div>
+    <div class="notes-sidebar">
+        <h3>Filters</h3>
+        <form>
+            <input placeholder="Search" type="text" class="form-control"/>
+            <select class="form-control">
+                <option>Category</option>
+                <option>Category</option>
+                <option>Category</option>
+            </select>
+            <button class="btn btn-default" type="submit">Filter</button>
+        </form>
+    </div>
 
-<a class="btn btn-success">Create Note +</a>
 
 <ul class="notes-list">
     <li class="note">
         <a href="#">
+            <div class="category">Category</div>
             <h2>Heading #1</h2>
             <p>Text Content #1</p>
         </a>
@@ -25,6 +40,7 @@
     </li>
     <li class="note">
         <a href="#">
+            <div class="category">Category</div>
             <h2>Heading #4</h2>
             <p>Text Content #4</p>
         </a>
@@ -37,6 +53,7 @@
     </li>
     <li class="note">
         <a href="#">
+            <div class="category">Category</div>
             <h2>Heading #6</h2>
             <p>Text Content #6</p>
         </a>
@@ -55,6 +72,7 @@
     </li>
     <li class="note">
         <a href="#">
+            <div class="category">Category</div>
             <h2>Heading #8</h2>
             <p>Text Content #8</p>
         </a>

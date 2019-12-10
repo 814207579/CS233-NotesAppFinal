@@ -13,10 +13,5 @@ namespace NotesAppFinal.Controllers
         {
             return View();
         }
-
-        public IActionResult Create([Bind("Id, Heading, Content")] Note note)
-        {
-            return View();
-        }
     }
 }
