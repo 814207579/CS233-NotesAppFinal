@@ -13,5 +13,7 @@ namespace NotesAppFinal.Data
             : base(options)
         {
         }
+
+        public DbSet<NoteModel> NoteModels { get; set; }
     }
 }

@@ -1,6 +1,46 @@
-﻿
+﻿@using NotesAppFinal.ViewModels;
+@model NotesModelCreate
+
+
+<h2>Create New Note</h2>
+
 <div class="container">
-    <form>
-        @* Create Form Goes Here *@
+    <form asp-action="Create">
+        <div class="form-group">
+            <label asp-for="NoteModel.Heading" class="control-label"></label>
+            <input asp-for="NoteModel.Heading" name="Heading" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="NoteModel.Content" class="control-label"></label>
+            <input asp-for="NoteModel.Content" name="Content" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Category</label>
+            <select class="form-control" asp-for="NoteModel.categoryId" name="CategoryId">
+                @{
+                    var categoryList = Enum.GetValues(typeof(NoteCategory));
+                    foreach (int categoryId in categoryList)
+                    {
+                        if (Model.NoteModel.categoryId == categoryId)
+                        {
+                                <option selected value="@categoryId">@Enum.GetName(typeof(NoteCategory), categoryId)</option>
+                        }
+                        else
+                        {
+                            <option value="@categoryId">@Enum.GetName(typeof(NoteCategory), categoryId)</option>
+                        }
+                    }
+                }
+
+            </select>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+
+
+
     </form>
 </div>

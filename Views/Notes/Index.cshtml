@@ -1,8 +1,8 @@
-﻿
+﻿@model List<NoteModel>
 
     <div class="notes-toolbar">
         <h2 class="notes-heading">Notes List</h2>
-        <a class="btn btn-success">Create Note +</a>
+        <a class="btn btn-success" asp-action="Create">Create Note +</a>
     </div>
     <div class="notes-sidebar">
         <h3>Filters</h3>
@@ -18,63 +18,28 @@
     </div>
 
 
-<ul class="notes-list">
-    <li class="note">
-        <a href="#">
-            <div class="category">Category</div>
-            <h2>Heading #1</h2>
-            <p>Text Content #1</p>
-        </a>
-    </li>
-    <li class="note">
-        <a href="#">
-            <h2>Heading #2</h2>
-            <p>Text Content #2</p>
-        </a>
-    </li>
-    <li class="note">
-        <a href="#">
-            <h2>Heading #3</h2>
-            <p>Text Content #3</p>
-        </a>
-    </li>
-    <li class="note">
-        <a href="#">
-            <div class="category">Category</div>
-            <h2>Heading #4</h2>
-            <p>Text Content #4</p>
-        </a>
-    </li>
-    <li class="note">
-        <a href="#">
-            <h2>Heading #5</h2>
-            <p>Text Content #5</p>
-        </a>
-    </li>
-    <li class="note">
-        <a href="#">
-            <div class="category">Category</div>
-            <h2>Heading #6</h2>
-            <p>Text Content #6</p>
-        </a>
-    </li>
-    <li class="note">
-        <a href="#">
-            <h2>Heading #2</h2>
-            <p>Text Content #2</p>
-        </a>
-    </li>
-    <li class="note">
-        <a href="#">
-            <h2>Heading #7</h2>
-            <p>Text Content #7</p>
-        </a>
-    </li>
-    <li class="note">
-        <a href="#">
-            <div class="category">Category</div>
-            <h2>Heading #8</h2>
-            <p>Text Content #8</p>
-        </a>
-    </li>
-</ul>
+    <ul class="notes-list">
+        @foreach (NoteModel note in Model)
+        {
+            <li class="note">
+                <a asp-action="Edit" asp-route-id="@note.Id">
+                    <div class="category">@Enum.GetName(typeof(NoteCategory), note.categoryId)</div>
+                    <h2>@note.Heading</h2>
+                    <p>@note.Content</p>
+                </a>
+            </li>
+        }
+
+
+
+        <!-- Keeping this for future reference -->
+        <!--
+            <li class="note">
+                <a href="#">
+                    <div class="category">Category</div>
+                    <h2>Heading #8</h2>
+                    <p>Text Content #8</p>
+                </a>
+            </li>
+        -->
+    </ul>
