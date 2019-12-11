@@ -6,17 +6,29 @@
     </div>
     <div class="notes-sidebar">
         <h3>Filters</h3>
-        <form>
-            <input placeholder="Search" type="text" class="form-control"/>
-            <select class="form-control">
-                <option>Category</option>
-                <option>Category</option>
-                <option>Category</option>
+        <form method="post">
+            <input type="text" class="form-control" name="filters.search" value="@ViewBag.filters?.Search" />
+            <select class="form-control" name="filters.category" value="@ViewBag.filters?.Category">
+                <!--Added an "All" search element,  this just passes "" as value.-->
+                <option name="filters.category" value="">All</option>
+                @foreach (var status in Enum.GetValues(typeof(NoteCategory)))
+                {
+                    if (status.ToString() == ViewBag.filters?.Category)
+                    {
+                        <option selected name="filters.category" value="@status">@status</option>
+                    }
+                    else
+                    {
+                        <option name="filters.category" value="@status">@status</option>
+                    }
+                }
             </select>
             <button class="btn btn-default" type="submit">Filter</button>
         </form>
     </div>
 
+    
+    
 
     <ul class="notes-list">
         @foreach (NoteModel note in Model)
@@ -29,17 +41,4 @@
                 </a>
             </li>
         }
-
-
-
-        <!-- Keeping this for future reference -->
-        <!--
-            <li class="note">
-                <a href="#">
-                    <div class="category">Category</div>
-                    <h2>Heading #8</h2>
-                    <p>Text Content #8</p>
-                </a>
-            </li>
-        -->
     </ul>

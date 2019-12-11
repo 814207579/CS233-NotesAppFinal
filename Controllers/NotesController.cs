@@ -24,6 +24,23 @@ namespace NotesAppFinal.Controllers
             return View(NoteModelList);
         }
 
+        [HttpPost]
+        public ActionResult Index(NoteModelFilters filters)
+        {
+            IQueryable<NoteModel> filteredNotes = _context.NoteModels.AsQueryable();
+
+            if(!String.IsNullOrEmpty(filters.Search)) {
+                filteredNotes = filteredNotes.Where(t => t.Heading.Contains(filters.Search));
+            }
+            NoteCategory category;
+            if(Enum.TryParse(filters.Category, true, out category))
+            {
+                filteredNotes = filteredNotes.Where(t => t.categoryId == (int)category);
+            }
+            ViewBag.filters = filters;
+            return View(filteredNotes.ToList());
+        }
+
         public ActionResult Create()
         {
             NotesModelCreate viewModel = new NotesModelCreate();

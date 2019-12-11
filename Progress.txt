@@ -11,7 +11,7 @@
 (DONE) Add Category Enum
 		Must have at least 3 static categories of your choice (EX: Shopping List, Reminders, General)
 		This will be similar to the status Enum in ReadyTask
-(TODO) Make Filter form on index page work
+(DONE) Make Filter form on index page work
 		Search input should search through the headings and contents to try to match a substring
 		Category dropdown should be populated with the category enum values and filter by a notes category ID if there is one
 		You should be able to clear your filter by selecting an empty dropdown item with no value
