@@ -1,0 +1,23 @@
+(DONE) Add a Note Model and DbSet
+		The Model should have an Id, Heading, Content
+		The Model will also have a category Id and a user Id
+(DONE) Add create/edit/delete actions for the Notes Object
+(DONE) Add Create and Edit forms on their corresponding views
+		Edit view should also have a delete button to delete the note
+(DONE) Make Index view functional to show list of Notes (currently its just markup)
+		Utilize the current markup (Your final result should look like the markup but functional with the notes from the DB)
+		When clicking a Note take user to edit view
+			User should return to index view when done editing
+(DONE) Add Category Enum
+		Must have at least 3 static categories of your choice (EX: Shopping List, Reminders, General)
+		This will be similar to the status Enum in ReadyTask
+(TODO) Make Filter form on index page work
+		Search input should search through the headings and contents to try to match a substring
+		Category dropdown should be populated with the category enum values and filter by a notes category ID if there is one
+		You should be able to clear your filter by selecting an empty dropdown item with no value
+		ReadyTask has a similar filter form for task Items
+(TODO) Add First and Last name to NotesUser Model
+		In Header instead of showing "Hello [UserName]", show "Welcome [FirstName] [LastName]
+(TODO) Users should only be able to see their own notes
+		When a note is created assign it to the logged in user
+		Users that are not logged in should not be able to create any notes or see other users notes.
