@@ -30,13 +30,34 @@
                             }
                         }
                     }
-
                 </select>
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <label class="control-label">Assigned User</label>
+                <select class="form-control" asp-for="NoteModel.userId" name="UserId">
+                    @{
+                        <option value="0">None</option>
+
+                        foreach (NotesUser user in Model.NotesUsers)
+                        {
+                            if (Model.NoteModel.userId == user.Id)
+                            {
+                                <option selected value="@user.Id">@user.Id + PlaceHolder</option>
+                            }
+                            else
+                            {
+                                <option value="@user.Id">@user.Id + PlaceHolder</option>
+                            }
+                        }
+                    }
+                </select>
             </div>
+
+
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
 
 
 

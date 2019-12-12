@@ -3,12 +3,15 @@
 @inject SignInManager<NotesUser> SignInManager
 @inject UserManager<NotesUser> UserManager
 
-@if (SignInManager.IsSignedIn(User))
+@{
+var user = await UserManager.GetUserAsync(User);
+if (SignInManager.IsSignedIn(User))
 {
     <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm" class="navbar-right">
         <ul class="nav navbar-nav navbar-right">
             <li>
-                <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+                
+                <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Welcome @user.FirstName @user.LastName</a>
             </li>
             <li>
                 <button type="submit" class="btn btn-link navbar-btn navbar-link">Logout</button>
@@ -22,4 +25,5 @@ else
         <li><a asp-area="Identity" asp-page="/Account/Register">Register</a></li>
         <li><a asp-area="Identity" asp-page="/Account/Login">Login</a></li>
     </ul>
+}
 }

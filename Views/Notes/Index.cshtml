@@ -1,8 +1,27 @@
 ﻿@model List<NoteModel>
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<NotesUser> UserManager
+
+@{
+    var user = await UserManager.GetUserAsync(User);
+
+
+
 
     <div class="notes-toolbar">
         <h2 class="notes-heading">Notes List</h2>
-        <a class="btn btn-success" asp-action="Create">Create Note +</a>
+        @try
+        {
+        
+            @if (UserManager.IsInRoleAsync(user, "Admin").Result)
+            {
+                <a class="btn btn-success" asp-action="Create">Create Note +</a>
+            }
+        }
+        catch(Exception)
+        {
+
+        }
     </div>
     <div class="notes-sidebar">
         <h3>Filters</h3>
@@ -27,18 +46,32 @@
         </form>
     </div>
 
-    
-    
+
+
 
     <ul class="notes-list">
         @foreach (NoteModel note in Model)
         {
-            <li class="note">
-                <a asp-action="Edit" asp-route-id="@note.Id">
-                    <div class="category">@Enum.GetName(typeof(NoteCategory), note.categoryId)</div>
-                    <h2>@note.Heading</h2>
-                    <p>@note.Content</p>
-                </a>
-            </li>
+            try
+            {
+                @if (user.Id == note.userId || UserManager.IsInRoleAsync(user, "Admin").Result)
+                {
+                    <li class="note">
+                        <a asp-action="Edit" asp-route-id="@note.Id">
+                            <div class="category">@Enum.GetName(typeof(NoteCategory), note.categoryId)</div>
+                            <h2>@note.Heading</h2>
+                            <p>@note.Content</p>
+                        </a>
+                    </li>
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+
         }
     </ul>
+
+
+}

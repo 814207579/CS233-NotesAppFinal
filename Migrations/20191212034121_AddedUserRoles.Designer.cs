@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NotesAppFinal.Data;
 
 namespace NotesAppFinal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191212034121_AddedUserRoles")]
+    partial class AddedUserRoles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -204,9 +206,9 @@ namespace NotesAppFinal.Migrations
                     b.ToTable("AspNetRoles");
 
                     b.HasData(
-                        new { Id = 1, ConcurrencyStamp = "98f0b3d1-bb2e-4ff9-9b95-dddde16e583e", Name = "Admin", NormalizedName = "ADMIN" },
-                        new { Id = 2, ConcurrencyStamp = "3c43af71-b392-4a1d-bffc-ec2dd4384cdc", Name = "Manager", NormalizedName = "MANAGER" },
-                        new { Id = 3, ConcurrencyStamp = "5be9a76d-4fc3-469f-b049-608964112a07", Name = "Dev", NormalizedName = "DEV" }
+                        new { Id = 1, ConcurrencyStamp = "b877f4f3-f2f1-4278-ac40-bf4c877e8f00", Name = "Admin", NormalizedName = "ADMIN" },
+                        new { Id = 2, ConcurrencyStamp = "2bd1bc99-3b2f-4c8d-ac7c-27272e10d33a", Name = "Manager", NormalizedName = "MANAGER" },
+                        new { Id = 3, ConcurrencyStamp = "df74142a-11c8-4994-a94c-32bca671cf73", Name = "Dev", NormalizedName = "DEV" }
                     );
                 });
 

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NotesAppFinal.Data;
 
 namespace NotesAppFinal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191212005314_UpdatedNotesUser")]
+    partial class UpdatedNotesUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -202,12 +204,6 @@ namespace NotesAppFinal.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
-
-                    b.HasData(
-                        new { Id = 1, ConcurrencyStamp = "98f0b3d1-bb2e-4ff9-9b95-dddde16e583e", Name = "Admin", NormalizedName = "ADMIN" },
-                        new { Id = 2, ConcurrencyStamp = "3c43af71-b392-4a1d-bffc-ec2dd4384cdc", Name = "Manager", NormalizedName = "MANAGER" },
-                        new { Id = 3, ConcurrencyStamp = "5be9a76d-4fc3-469f-b049-608964112a07", Name = "Dev", NormalizedName = "DEV" }
-                    );
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>

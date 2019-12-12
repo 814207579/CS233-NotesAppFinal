@@ -45,6 +45,7 @@ namespace NotesAppFinal.Controllers
         {
             NotesModelCreate viewModel = new NotesModelCreate();
             viewModel.NoteModel = new NoteModel();
+            viewModel.NotesUsers = _context.Users.ToList();
             return View(viewModel);
         }
 
@@ -66,6 +67,7 @@ namespace NotesAppFinal.Controllers
         {
             NotesModelCreate viewModel = new NotesModelCreate();
             viewModel.NoteModel = _context.NoteModels.Find(Id);
+            viewModel.NotesUsers = _context.Users.ToList();
             return View(viewModel);
         }
 
@@ -80,7 +82,10 @@ namespace NotesAppFinal.Controllers
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(Note);
+            NotesModelCreate viewModel = new NotesModelCreate();
+            viewModel.NoteModel = Note;
+            viewModel.NotesUsers = _context.Users.ToList();
+            return View(viewModel);
         }
 
         public ActionResult Delete(int id)

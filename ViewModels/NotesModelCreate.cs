@@ -9,5 +9,7 @@ namespace NotesAppFinal.ViewModels
     public class NotesModelCreate
     {
         public NoteModel NoteModel { get; set; }
+
+        public List<NotesUser> NotesUsers { get; set; }
     }
 }

@@ -15,5 +15,35 @@ namespace NotesAppFinal.Data
         }
 
         public DbSet<NoteModel> NoteModels { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<NotesUserRole>().HasData
+                (
+                    new NotesUserRole[]
+                    {
+                        new NotesUserRole
+                        {
+                            Id = 1,
+                            Name = "Admin",
+                            NormalizedName = "Admin".ToUpper()
+                        },
+                        new NotesUserRole
+                        {
+                            Id = 2,
+                            Name = "Manager",
+                            NormalizedName = "Manager".ToUpper()
+                        },
+                        new NotesUserRole
+                        {
+                            Id = 3,
+                            Name = "Dev",
+                            NormalizedName = "Dev".ToUpper()
+                        }
+                    }
+                );
+        }
     }
 }
