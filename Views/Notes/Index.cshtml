@@ -9,52 +9,65 @@
 
 
     <div class="notes-toolbar">
-        <h2 class="notes-heading">Notes List</h2>
         @try
         {
-        
-            @if (UserManager.IsInRoleAsync(user, "Admin").Result)
+            @if (UserManager.IsInRoleAsync(user, "Admin").Result ||
+               UserManager.IsInRoleAsync(user, "User").Result)
             {
+                <h2 class="notes-heading">Notes List</h2>
                 <a class="btn btn-success" asp-action="Create">Create Note +</a>
             }
         }
-        catch(Exception)
+        catch (Exception)
         {
-
+            <h2>Please Login to See Notes</h2>
         }
     </div>
-    <div class="notes-sidebar">
-        <h3>Filters</h3>
-        <form method="post">
-            <input type="text" class="form-control" name="filters.search" value="@ViewBag.filters?.Search" />
-            <select class="form-control" name="filters.category" value="@ViewBag.filters?.Category">
-                <!--Added an "All" search element,  this just passes "" as value.-->
-                <option name="filters.category" value="">All</option>
-                @foreach (var status in Enum.GetValues(typeof(NoteCategory)))
-                {
-                    if (status.ToString() == ViewBag.filters?.Category)
-                    {
-                        <option selected name="filters.category" value="@status">@status</option>
-                    }
-                    else
-                    {
-                        <option name="filters.category" value="@status">@status</option>
-                    }
-                }
-            </select>
-            <button class="btn btn-default" type="submit">Filter</button>
-        </form>
-    </div>
 
-
-
-
-    <ul class="notes-list">
-        @foreach (NoteModel note in Model)
+    @try
+    {
+        @if (UserManager.IsInRoleAsync(user, "Admin").Result ||
+               UserManager.IsInRoleAsync(user, "User").Result)
         {
-            try
+            <div class="notes-sidebar">
+                <h3>Filters</h3>
+                <form method="post">
+                    <input type="text" class="form-control" name="filters.search" value="@ViewBag.filters?.Search" />
+                    <select class="form-control" name="filters.category" value="@ViewBag.filters?.Category">
+                        <!--Added an "All" search element,  this just passes "" as value.-->
+                        <option name="filters.category" value="">All</option>
+                        @foreach (var status in Enum.GetValues(typeof(NoteCategory)))
+                        {
+                            if (status.ToString() == ViewBag.filters?.Category)
+                            {
+                                <option selected name="filters.category" value="@status">@status</option>
+                            }
+                            else
+                            {
+                                <option name="filters.category" value="@status">@status</option>
+                            }
+                        }
+                    </select>
+                    <button class="btn btn-default" type="submit">Filter</button>
+                </form>
+            </div>
+        }
+    }
+    catch (Exception) { }
+
+
+
+
+<ul class="notes-list">
+    @foreach (NoteModel note in Model)
+    {
+        try
+        {
+            @if (UserManager.IsInRoleAsync(user, "Admin").Result ||
+               UserManager.IsInRoleAsync(user, "User").Result)
             {
-                @if (user.Id == note.userId || UserManager.IsInRoleAsync(user, "Admin").Result)
+                @if (user.Id == note.userId)
+
                 {
                     <li class="note">
                         <a asp-action="Edit" asp-route-id="@note.Id">
@@ -65,13 +78,14 @@
                     </li>
                 }
             }
-            catch (Exception)
-            {
-
-            }
+        }
+        catch (Exception)
+        {
 
         }
-    </ul>
+
+    }
+</ul>
 
 
 }

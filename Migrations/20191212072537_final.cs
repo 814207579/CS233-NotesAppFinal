@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace NotesAppFinal.Migrations
 {
-    public partial class initial : Migration
+    public partial class final : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -42,11 +42,29 @@ namespace NotesAppFinal.Migrations
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false)
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    FirstName = table.Column<string>(maxLength: 20, nullable: true),
+                    LastName = table.Column<string>(maxLength: 20, nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "NoteModels",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Heading = table.Column<string>(nullable: true),
+                    Content = table.Column<string>(nullable: true),
+                    categoryId = table.Column<int>(nullable: false),
+                    userId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NoteModels", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -155,6 +173,27 @@ namespace NotesAppFinal.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { 1, "e3a49b24-017c-478d-8f6a-ea7ab1a0cd4e", "Admin", "ADMIN" },
+                    { 2, "4e2ff4e6-cd4d-4902-a125-1e32c24c9579", "Manager", "MANAGER" },
+                    { 3, "1f74f9a9-1544-4162-99f9-88a897ef3cc1", "Dev", "DEV" },
+                    { 4, "1a57309b-f35c-4ee5-80b9-2daff337ccfc", "User", "USER" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "NoteModels",
+                columns: new[] { "Id", "Content", "Heading", "categoryId", "userId" },
+                values: new object[,]
+                {
+                    { 100, "Content1", "Heading1", 0, null },
+                    { 101, "Content2", "Heading2", 1, null },
+                    { 102, "Content3", "Heading3", 2, null }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -211,6 +250,9 @@ namespace NotesAppFinal.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "NoteModels");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

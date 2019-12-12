@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using NotesAppFinal.Models;
@@ -41,8 +42,47 @@ namespace NotesAppFinal.Data
                             Id = 3,
                             Name = "Dev",
                             NormalizedName = "Dev".ToUpper()
+                        },
+                        new NotesUserRole
+                        {
+                            Id = 4,
+                            Name = "User",
+                            NormalizedName = "User".ToUpper()
                         }
                     }
+                    );
+
+            builder.Entity<NoteModel>().HasData
+                (
+                new NoteModel[]
+                {
+                    new NoteModel
+                    {
+                        Id = 100,
+                        Heading = "Heading1",
+                        Content = "Content1",
+                        categoryId = 0,
+                        userId = null
+                    },
+
+                    new NoteModel
+                    {
+                        Id = 101,
+                        Heading = "Heading2",
+                        Content = "Content2",
+                        categoryId = 1,
+                        userId = null
+                    },
+
+                    new NoteModel
+                    {
+                        Id = 102,
+                        Heading = "Heading3",
+                        Content = "Content3",
+                        categoryId = 2,
+                        userId = null
+                    }
+                }
                 );
         }
     }

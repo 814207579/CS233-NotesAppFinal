@@ -14,6 +14,6 @@ namespace NotesAppFinal.Models
 
         public int categoryId { get; set; }
 
-        public int userId { get; set; }
+        public int? userId { get; set; }
     }
 }

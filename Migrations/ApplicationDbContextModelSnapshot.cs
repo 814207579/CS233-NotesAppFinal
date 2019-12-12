@@ -114,11 +114,17 @@ namespace NotesAppFinal.Migrations
 
                     b.Property<int>("categoryId");
 
-                    b.Property<int>("userId");
+                    b.Property<int?>("userId");
 
                     b.HasKey("Id");
 
                     b.ToTable("NoteModels");
+
+                    b.HasData(
+                        new { Id = 100, Content = "Content1", Heading = "Heading1", categoryId = 0 },
+                        new { Id = 101, Content = "Content2", Heading = "Heading2", categoryId = 1 },
+                        new { Id = 102, Content = "Content3", Heading = "Heading3", categoryId = 2 }
+                    );
                 });
 
             modelBuilder.Entity("NotesAppFinal.Models.NotesUser", b =>
@@ -204,9 +210,10 @@ namespace NotesAppFinal.Migrations
                     b.ToTable("AspNetRoles");
 
                     b.HasData(
-                        new { Id = 1, ConcurrencyStamp = "98f0b3d1-bb2e-4ff9-9b95-dddde16e583e", Name = "Admin", NormalizedName = "ADMIN" },
-                        new { Id = 2, ConcurrencyStamp = "3c43af71-b392-4a1d-bffc-ec2dd4384cdc", Name = "Manager", NormalizedName = "MANAGER" },
-                        new { Id = 3, ConcurrencyStamp = "5be9a76d-4fc3-469f-b049-608964112a07", Name = "Dev", NormalizedName = "DEV" }
+                        new { Id = 1, ConcurrencyStamp = "e3a49b24-017c-478d-8f6a-ea7ab1a0cd4e", Name = "Admin", NormalizedName = "ADMIN" },
+                        new { Id = 2, ConcurrencyStamp = "4e2ff4e6-cd4d-4902-a125-1e32c24c9579", Name = "Manager", NormalizedName = "MANAGER" },
+                        new { Id = 3, ConcurrencyStamp = "1f74f9a9-1544-4162-99f9-88a897ef3cc1", Name = "Dev", NormalizedName = "DEV" },
+                        new { Id = 4, ConcurrencyStamp = "1a57309b-f35c-4ee5-80b9-2daff337ccfc", Name = "User", NormalizedName = "USER" }
                     );
                 });
 
