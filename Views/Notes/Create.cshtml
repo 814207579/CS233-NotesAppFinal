@@ -12,15 +12,15 @@
     <div class="container">
         <form asp-action="Create">
             <div class="form-group">
-                <label asp-for="NoteModel.Heading" class="control-label"></label>
+                <label asp-for="NoteModel.Heading" class="control-label">Heading</label>
                 <input asp-for="NoteModel.Heading" name="Heading" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="NoteModel.Content" class="control-label"></label>
+                <label asp-for="NoteModel.Content" class="control-label">Content</label>
                 <input asp-for="NoteModel.Content" name="Content" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="NoteModel.userId" class="control-label"></label>
+                <label asp-for="NoteModel.userId" class="control-label">AssignedUser</label>
                 <input readonly asp-for="NoteModel.userId" name="userId" class="form-control" value="@user.Id" />
             </div>
 

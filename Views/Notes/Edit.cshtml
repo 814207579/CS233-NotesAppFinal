@@ -1,73 +1,79 @@
 ﻿@using NotesAppFinal.ViewModels;
 @model NotesModelCreate
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<NotesUser> UserManager
 
+@{
+    var user = await UserManager.GetUserAsync(User);
 
-    <div class="container">
-        <form asp-action="Edit">
-            <div class="form-group">
-                <label asp-for="NoteModel.Heading" class="control-label"></label>
-                <input asp-for="NoteModel.Heading" name="Heading" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label asp-for="NoteModel.Content" class="control-label"></label>
-                <input asp-for="NoteModel.Content" name="Content" class="form-control" />
-            </div>
+<div class="container">
+    <form asp-action="Edit">
+        <div class="form-group">
+            <label asp-for="NoteModel.Heading" class="control-label"></label>
+            <input asp-for="NoteModel.Heading" name="Heading" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="NoteModel.Content" class="control-label"></label>
+            <input asp-for="NoteModel.Content" name="Content" class="form-control" />
+        </div>
 
-            <div class="form-group">
-                <label class="control-label">Category</label>
-                <select class="form-control" asp-for="NoteModel.categoryId" name="CategoryId">
-                    @{
-                        var categoryList = Enum.GetValues(typeof(NoteCategory));
-                        foreach (int categoryId in categoryList)
+        <div class="form-group">
+            <label class="control-label">Category</label>
+            <select class="form-control" asp-for="NoteModel.categoryId" name="CategoryId">
+                @{
+                    var categoryList = Enum.GetValues(typeof(NoteCategory));
+                    foreach (int categoryId in categoryList)
+                    {
+                        if (Model.NoteModel.categoryId == categoryId)
                         {
-                            if (Model.NoteModel.categoryId == categoryId)
-                            {
-                                <option selected value="@categoryId">@Enum.GetName(typeof(NoteCategory), categoryId)</option>
-                            }
-                            else
-                            {
-                                <option value="@categoryId">@Enum.GetName(typeof(NoteCategory), categoryId)</option>
-                            }
+                            <option selected value="@categoryId">@Enum.GetName(typeof(NoteCategory), categoryId)</option>
+                        }
+                        else
+                        {
+                            <option value="@categoryId">@Enum.GetName(typeof(NoteCategory), categoryId)</option>
                         }
                     }
-                </select>
-            </div>
+                }
+            </select>
+        </div>
 
-            <div class="form-group">
-                <label class="control-label">Assigned User</label>
-                <select class="form-control" asp-for="NoteModel.userId" name="UserId">
-                    @{
-                        <option value="0">None</option>
+        <div class="form-group">
+            <label class="control-label">Assigned User</label>
+            <select class="form-control" asp-for="NoteModel.userId" name="UserId">
+                @{
+                    <option value="0">None</option>
 
-                        foreach (NotesUser user in Model.NotesUsers)
+                    foreach (NotesUser user in Model.NotesUsers)
+                    {
+                        if (Model.NoteModel.userId == user.Id)
                         {
-                            if (Model.NoteModel.userId == user.Id)
-                            {
-                                <option selected value="@user.Id">@user.Id + PlaceHolder</option>
-                            }
-                            else
-                            {
-                                <option value="@user.Id">@user.Id + PlaceHolder</option>
-                            }
+                            <option selected value="@user.Id">@user.LastName, @user.FirstName (@user.Id)</option>
+                        }
+                        else
+                        {
+                            <option value="@user.Id">@user.LastName, @user.FirstName (@user.Id)</option>
                         }
                     }
-                </select>
-            </div>
+                }
+            </select>
+        </div>
 
 
-                <div class="form-group">
-                    <input type="submit" value="Save" class="btn btn-default" />
-                </div>
-
-
-
-        </form>
-
-        <a class="btn btn-default" asp-action="Delete" asp-route-id="@Model.NoteModel.Id">Delete</a>
-
-       
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
 
 
 
-        @* Include Delete Button On this View as well *@
-    </div>
+    </form>
+
+    <a class="btn btn-default" asp-action="Delete" asp-route-id="@Model.NoteModel.Id">Delete</a>
+
+
+
+
+
+    @* Include Delete Button On this View as well *@
+</div>
+
+}

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using NotesAppFinal.Data;
 using NotesAppFinal.Models;
 using NotesAppFinal.ViewModels;
+using Microsoft.AspNetCore.Identity;
 
 namespace NotesAppFinal.Controllers
 {
